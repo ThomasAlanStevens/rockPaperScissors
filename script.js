@@ -1,4 +1,10 @@
-document.querySelector('.play').addEventListener('click', game)
+document.querySelector('.rock').addEventListener('click', playRound)
+document.querySelector('.paper').addEventListener('click', playRound)
+document.querySelector('.scissors').addEventListener('click', playRound)
+let choices = document.querySelector('section')
+let div = document.querySelector('div')
+let computerScore = 0
+let playerScore = 0
 
 //Make the computer randomly choose rock, paper, or scissors.
 function computerPlay(){
@@ -9,28 +15,46 @@ function computerPlay(){
 }
 // compare user and computer choices, declare winner.
 function playRound(){
-    let playerChoice = prompt('Rock, Paper, Scissors?').toLowerCase()
     let computerChoice = computerPlay()
+    let playerChoice = this.innerText
+    choices.innerText = `Player: ${playerChoice} Computer: ${computerChoice}`
     if(playerChoice == computerChoice){
-        return 'TIE'
+        div.innerText = `Computer Score: ${computerScore}  Player Score ${playerScore}`
     }
     else if(playerChoice == 'rock' && computerChoice == 'paper'){
-        return 'LOSE'
+        computerScore++
+        div.innerText = `Computer Score: ${computerScore}  Player Score ${playerScore}`
     }
     else if(playerChoice == 'paper' && computerChoice == 'scissors'){
-        return 'LOSE'
+        computerScore++
+        div.innerText = `Computer Score: ${computerScore}  Player Score ${playerScore}`
     }
     else if(playerChoice == 'scissors' && computerChoice == 'rock'){
-        return 'LOSE'
+        computerScore++
+        div.innerText = `Computer Score: ${computerScore}  Player Score ${playerScore}`
     }
-    else{
-        return 'WINNER'
+    else {
+        playerScore++
+        div.innerText = `Computer Score: ${computerScore}  Player Score ${playerScore}`
+    }
+
+    if(computerScore == 5){
+        div.innerText = `Results: Computer wins 
+        `
+        computerScore = 0
+        playerScore = 0
+    }
+    else if(playerScore == 5){
+        div.innerText = `Results: Player wins 
+        ` 
+        computerScore = 0
+        playerScore = 0
     }
 }
 
 //calls playRound for 5 rounds and prints results.
-function game(){
-    for(let i = 0; i < 5; i++){
-        console.log(playRound())
-    }
-}
+// function game(){
+//     for(let i = 0; i < 5; i++){
+//         console.log(playRound())
+//     }
+// }
